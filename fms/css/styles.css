@@ -1,0 +1,17 @@
+#myModal .modal-header {
+    background-color: #e74a3b;
+    color: #fff;
+}
+
+#beginForm {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#actionsBtn {
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
