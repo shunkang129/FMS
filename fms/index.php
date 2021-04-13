@@ -134,9 +134,7 @@ include('includes/navbar.php');
                     <div class="chart-area">
                         <canvas id="myAreaChart"></canvas>
                     </div>
-                    <hr>
-                    Styling for the area chart can be found in the
-                    <code>/js/demo/chart-area-demo.js</code> file.
+
                 </div>
             </div>
 
@@ -149,9 +147,6 @@ include('includes/navbar.php');
                     <div class="chart-bar">
                         <canvas id="myBarChart"></canvas>
                     </div>
-                    <hr>
-                    Styling for the bar chart can be found in the
-                    <code>/js/demo/chart-bar-demo.js</code> file.
                 </div>
             </div>
 
@@ -169,9 +164,6 @@ include('includes/navbar.php');
                     <div class="chart-pie pt-4">
                         <canvas id="myPieChart"></canvas>
                     </div>
-                    <hr>
-                    Styling for the donut chart can be found in the
-                    <code>/js/demo/chart-pie-demo.js</code> file.
                 </div>
             </div>
             <div class="card shadow mb-4">

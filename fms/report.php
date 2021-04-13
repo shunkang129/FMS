@@ -3,9 +3,8 @@
 include('security.php');
 include('includes/header.php');
 include('includes/navbar.php');
-
+date_default_timezone_set("Asia/Kuala_Lumpur");
 ?>
-
 
 
 <div class="container-fluid">
@@ -18,15 +17,18 @@ include('includes/navbar.php');
                     <h6 class="m-0 font-weight-bold text-primary">Add new report</h6>
                 </div>
                 <div class="col">
-                    <h6 class="m-0 font-weight-bold text-dark float-right"><?php echo date('Y-m-d H:i'); ?></h6>
+                    <h6 class="m-0 font-weight-bold text-dark float-right"><?php echo date('Y-m-d h:ia'); ?></h6>
                 </div>
             </div>
         </div>
         <div class="card-body">
+            <h6 class="m-0 font-weight-bold text-secondary">Branch Info</h6>
+            &nbsp;
+            &nbsp;
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-2">
-                        <label for="inputState">State</label>
+                        <label for="inputState">Branch</label>
                         <select id="inputState" class="form-control">
                             <option selected>Choose...</option>
                             <option>Stadium</option>
@@ -38,7 +40,35 @@ include('includes/navbar.php');
                     &nbsp;
                     &nbsp;
                     &nbsp;
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-2">
+                        <label for="incidentStatus">Incident Status</label>
+                        <select class="form-control">
+                            <option selected>Choose...</option>
+                            <option>Early stage</option>
+                            <option>Mid Stage</option>
+                            <option>Closed</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <h6 class="m-0 font-weight-bold text-secondary">Incident Info</h6>
+                &nbsp;
+                &nbsp;
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="inputState">Branch</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>Stadium</option>
+                            <option>Pengkalan</option>
+                            <option>AreaB</option>
+                            <option>AreaC</option>
+                        </select>
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group col">
                         <label for="inputState">Incident Type</label>
                         <select id="inputState" class="form-control">
                             <option selected>Choose...</option>
@@ -50,7 +80,7 @@ include('includes/navbar.php');
                     &nbsp;
                     &nbsp;
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col">
                         <label for="">Incident datetime</label>
                         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                             <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
@@ -62,22 +92,95 @@ include('includes/navbar.php');
 
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                    <div class="form-group col-md-2">
+                        <label for="inputEmail4">Incident</label>
+                        <input type="text" class="form-control" id="inputEmail4">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4">
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group col-2">
+                        <label for="incidentStatus">Incident Status</label>
+                        <select class="form-control">
+                            <option selected>Choose...</option>
+                            <option>Early stage</option>
+                            <option>Mid Stage</option>
+                            <option>Closed</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Enter Address..">
                 </div>
-                <div class="form-group">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                <hr>
+                <h6 class="m-0 font-weight-bold text-secondary">Victim Info</h6>
+                &nbsp;
+                &nbsp;
+                <div class="form-row">
+                    <div class="form-group col-3">
+                        <label>Fatalities</label>
+                        <div class="input-group">
+                            <select class="custom-select" id="inputGroupSelect02">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect02">Person</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-3">
+                        <label>Fatalities</label>
+                        <div class="input-group">
+                            <select class="custom-select" id="inputGroupSelect02">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect02">Person</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-3">
+                        <label>Injured</label>
+                        <div class="input-group">
+                            <select class="custom-select" id="inputGroupSelect02">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect02">Person</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-3">
+                        <label>Saved</label>
+                        <div class="input-group">
+                            <select class="custom-select" id="inputGroupSelect02">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect02">Person</label>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -96,6 +199,7 @@ include('includes/navbar.php');
                         <input type="text" class="form-control" id="inputZip">
                     </div>
                 </div>
+                <hr>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Support document</label>
@@ -117,9 +221,9 @@ include('includes/navbar.php');
 
         </div>
     </div>
-
-
 </div>
+
+
 
 
 

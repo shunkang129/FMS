@@ -2,7 +2,7 @@
 
 include('dbconfig.php');
 
-
+// login
 if (isset($_POST['loginbtn'])) {
     $email_login = $_POST['email'];
     $password_login = $_POST['password'];
@@ -50,7 +50,6 @@ if (isset($_POST['loginbtn'])) {
 }
 
 
-
 // save faculty
 if (isset($_POST['save_faculty'])) {
 
@@ -78,7 +77,6 @@ if (isset($_POST['save_faculty'])) {
         }
     }
 }
-
 
 
 // check email valid / exist 
@@ -122,8 +120,7 @@ if (isset($_POST['registerbtn'])) {
         }
     } else {
         $_SESSION['status'] = "Password and confirm password does not match";
-        echo "not matched";
-        header('Location: signup.php');
+        header('Location: register.php');
     }
 }
 
@@ -163,11 +160,10 @@ if (isset($_POST['deletebtn'])) {
         $_SESSION['status'] = "Failed to delete data";
         header('Location: register.php');
     }
-    exit();
 }
 
 
-//register name verification
+// register name verification
 if (isset($_POST['user_name'])) {
     $name = $_POST['user_name'];
 
@@ -183,7 +179,7 @@ if (isset($_POST['user_name'])) {
     exit();
 }
 
-//register email verification
+// register email verification
 if (isset($_POST['user_email'])) {
     $email = $_POST['user_email'];
 
@@ -197,4 +193,22 @@ if (isset($_POST['user_email'])) {
         echo "OK";
     }
     exit();
+}
+
+// add report
+if (isset($_POST['addReportBtn'])) {
+    $branch = $_POST['branch'];
+    $incidentType = $_POST['incidentType'];
+    $reportDate = $_POST['report_date'];
+
+    $sql = "INSERT INTO report(branch, incidentType, reportDate) VALUES ('$branch', '$incidentType', '$reportDate')";
+    $sql_run = mysqli_query($mysqli, $sql);
+
+    if ($sql_run) {
+        $_SESSION['success'] = "Data added";
+        header('Location: reportTest.php');
+    } else {
+        $_SESSION['status'] = "Not added";
+        header('Location: reportTest.php');
+    }
 }

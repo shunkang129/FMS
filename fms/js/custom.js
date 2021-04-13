@@ -42,9 +42,17 @@ $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Const
 });
 
 $(function() {
-    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker1').datetimepicker({
+        format: "YYYY-MM-DD HH:mma"
+    });
 });
 
+$(function() {
+    $('#datetimepicker2').datetimepicker({
+        format: "YYYY-MM-DD",
+
+    });
+});
 
 // delete confirmation
 $(document).on('click', '#delBtn', function confirmDel() {

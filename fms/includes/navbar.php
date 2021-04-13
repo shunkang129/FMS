@@ -38,6 +38,27 @@ if ($_SESSION['role'] == 'Admin') {
                     <i class="fas fa-school"></i>
                     <span>Faculty</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-chart-area"></i>
+                    <span>Charts</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Chart category</h6>
+                        <a class="collapse-item" href="chartTest.php">
+                            <i class="fas fa-user-plus"></i>
+                            &nbsp;
+                            &nbsp;
+                            <span>Chart 1</span></a>
+                        <a class="collapse-item" href="#">
+                            <i class="fas fa-user-plus"></i>
+                            &nbsp;
+                            &nbsp;
+                            <span>Chart 2</span></a>
+                    </div>
+                </div>
+            </li>
         <?php
         }
         if ($_SESSION['role'] == 'User' || 'Admin') {
@@ -53,7 +74,7 @@ if ($_SESSION['role'] == 'Admin') {
             <!-- Nav Item - Report Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-user-cog"></i>
                     <span>Users</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -61,26 +82,39 @@ if ($_SESSION['role'] == 'Admin') {
                         <h6 class="collapse-header">Manage Users</h6>
                         <a class="collapse-item" href="#">
                             <i class="fas fa-user-plus"></i>
+                            &nbsp;
+                            &nbsp;
                             <span>Add users</span></a>
                         <a class="collapse-item" href="register.php">
-                            <i class="fas fa-user-plus"></i>
+                            <i class="fas fa-table"></i>
+                            &nbsp;
+                            &nbsp;
                             <span>View Users table</span></a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span>Report</span>
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Manage Report</h6>
                         <a class="collapse-item" href="report.php">
-                            <i class="fas fa-user-plus"></i>
+                            <i class="fas fa-file-alt"></i>
+                            &nbsp;
+                            &nbsp;
                             <span>Add Report</span></a>
-                        <a class="collapse-item" href="register.php">
-                            <i class="fas fa-user-plus"></i>
+                        <a class="collapse-item" href="reportTest.php">
+                            <i class="fas fa-file-alt"></i>
+                            &nbsp;
+                            &nbsp;
+                            <span>Add Report(Testing)</span></a>
+                        <a class="collapse-item" href="reportTable.php">
+                            <i class="fas fa-table"></i>
+                            &nbsp;
+                            &nbsp;
                             <span>View Report Table</span></a>
                     </div>
                 </div>

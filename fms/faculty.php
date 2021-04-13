@@ -64,7 +64,7 @@ include('includes/navbar.php');
 
             <?php
             if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert"> ' . $_SESSION['success'] . ' 
+                echo '<div class="alert alert-success alert-dismissible fade show" id="message" role="alert"> ' . $_SESSION['success'] . ' 
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span> </button></div>';
                 unset($_SESSION['success']);
@@ -128,12 +128,12 @@ include('includes/navbar.php');
                                     <td class="align-middle"><?php echo '<img src="upload/' . $row['images'] . '" width="80px;" height="80px;" alt="image">'; ?></td>
                                     <td class="align-middle">
                                         <div id="actionsBtn">
+                                            <button type="submit" id="editBtn" class="btn btn-warning btn-circle btn-sm align-center" name="edit_btn"> <i class="fas fa-edit"></i></button>&nbsp;
                                             <form method="POST" action="print.php">
-                                                <button type="submit" id="editBtn" class="btn btn-warning btn-circle btn-sm align-center" name="edit_btn"> <i class="fas fa-edit"></i></button>&nbsp;
                                                 <input type="hidden" name="print_id" value="<?php echo $row['id']; ?>">
                                                 <button type="submit" id="printBtn" class="btn btn-info btn-circle btn-sm align-center" name="print_btn"> <i class="fas fa-file-pdf"></i></button>&nbsp;
-                                                <button type="submit" id="delBtn" class="btn btn-danger btn-circle btn-sm align-center" name="delete_btn"> <i class="fas fa-times"></i></button>
                                             </form>
+                                            <button type="submit" id="delBtn" class="btn btn-danger btn-circle btn-sm align-center" name="delete_btn"> <i class="fas fa-times"></i></button>
                                         </div>
                                     </td>
 

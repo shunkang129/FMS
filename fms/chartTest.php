@@ -1,58 +1,221 @@
 <?php
 
-session_start();
-require "dbconfig.php";
-
+include('security.php');
+include('includes/header.php');
+include('includes/navbar.php');
 ?>
 
+<div class="container-fluid">
 
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js' integrity='sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="styles.css">
-    <title>trying</title>
-</head>
-
-<body>
-    <div class="container">
-        <canvas id="myChart"></canvas>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Chart</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate
+            Report</a>
     </div>
 
-    <script>
-        let ctx = document.getElementById('myChart');
-        let myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["Admin", "Users", "Others"],
-                datasets: [{
-                    label: 'No of users',
-                    data: [<?php
-                            echo '"' . $adminCountRow . '",';
-                            echo '"' . $userCountRow . '",';
-                            echo '"' . $otherCountRow . '",';
-                            ?>],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total registered admin
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
 
-            }
-        });
-    </script>
-</body>
+                                <?php
 
-</html>
+
+                                $query = "SELECT id FROM register ORDER BY id";
+                                $query_run = mysqli_query($mysqli, $query);
+
+                                $row = mysqli_num_rows($query_run);
+
+                                echo '<i class="fas fa-h1">' . $row . '</i>';
+                                ?>
+
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Admin
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                echo '<i class="fas fa-h1">' . $adminCountRow . '</i>';
+
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Total users with user role
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                echo '<i class="fas fa-h1">' . $userCountRow . '</i>';
+
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Other Users
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php
+                                echo '<i class="fas fa-h1">' . $otherCountRow . '</i>';
+
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6">
+            <!-- Area Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Pie Chart (branch stats)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="pieChart1" height="165"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart (incident stats)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="incidentBarChart" height="165"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Polar Chart (incident stats)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myPolarChart" height="180"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">User Chart</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myChart" height="180"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Amount of cases over month</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="testingChart" height="100"></canvas>
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Case amount over day</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="testingChart3" height="100"></canvas>
+                    </div>
+                    <hr class="align-center">
+                    A time series chart of amount of cases over days.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<?php
+
+include('includes/scripts.php');
+include('includes/footer.php');
+
+?>

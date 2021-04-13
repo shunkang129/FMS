@@ -29,12 +29,40 @@ if ($mysqli) {
     ';
 }
 
-
-$adminCount = mysqli_query($mysqli, "SELECT id FROM register WHERE usertype='admin'");
+// pie chart (user stats)
+$adminCount = mysqli_query($mysqli, "SELECT id FROM register WHERE usertype='Admin'");
 $adminCountRow = mysqli_num_rows($adminCount);
 
-$userCount = mysqli_query($mysqli, "SELECT id FROM register WHERE usertype='user'");
+$userCount = mysqli_query($mysqli, "SELECT id FROM register WHERE usertype='User'");
 $userCountRow = mysqli_num_rows($userCount);
 
-$otherCount = mysqli_query($mysqli, "SELECT usertype FROM register WHERE usertype=''");
+$otherCount = mysqli_query($mysqli, "SELECT usertype FROM register WHERE usertype='' ");
 $otherCountRow = mysqli_num_rows($otherCount);
+
+// pie chart (Branch stats)
+
+$stadiumCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE branch='Stadium Ipoh'");
+$stadiumCaseCountRow = mysqli_num_rows($stadiumCaseCount);
+
+$PengCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE branch='Pengkalan'");
+$PengCaseCountRow = mysqli_num_rows($PengCaseCount);
+
+$BCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE branch='AreaB'");
+$BCaseCountRow = mysqli_num_rows($BCaseCount);
+
+$CCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE branch='AreaC'");
+$CCaseCountRow = mysqli_num_rows($CCaseCount);
+
+// bar chart (Incident Type stats)
+
+$fireCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE incidentType='Fire'");
+$fireCaseCountRow = mysqli_num_rows($fireCaseCount);
+
+$floodCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE incidentType='Flood'");
+$floodCaseCountRow = mysqli_num_rows($floodCaseCount);
+
+$AnimalCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE incidentType='Animal capture'");
+$AnimalCaseCountRow = mysqli_num_rows($AnimalCaseCount);
+
+$OtherCaseCount = mysqli_query($mysqli, "SELECT id FROM report WHERE incidentType <> 'Fire' AND incidentType <> 'Flood' AND incidentType <> 'Animal Capture' ");
+$OtherCaseCountRow = mysqli_num_rows($OtherCaseCount);
