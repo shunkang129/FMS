@@ -54,6 +54,13 @@ $(function() {
     });
 });
 
+$(function() {
+    $('#datetimepicker3').datetimepicker({
+        format: "YYYY-MM-DD",
+
+    });
+});
+
 // delete confirmation
 $(document).on('click', '#delBtn', function confirmDel() {
     if (confirm("Are you sure you want to delete this data?")) {
@@ -104,3 +111,33 @@ function checkname() {
         return false;
     }
 }
+
+$(document).on('click', '#disableBtn', function confirmChg() {
+    if (confirm("Are you sure you want to disable this user?")) {
+        $.ajax({
+            url: "code.php",
+            method: "POST",
+            data: {
+                'chgBtn': 1,
+            },
+        });
+        return true;
+    } else {
+        return false;
+    }
+});
+
+$(document).on('click', '#enableBtn', function confirmChg() {
+    if (confirm("Are you sure you want to enable this user?")) {
+        $.ajax({
+            url: "code.php",
+            method: "POST",
+            data: {
+                'chgBtn': 1,
+            },
+        });
+        return true;
+    } else {
+        return false;
+    }
+});

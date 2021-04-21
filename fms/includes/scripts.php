@@ -64,14 +64,14 @@
     var pieChart1 = new Chart(ctx2, {
         type: 'pie',
         data: {
-            labels: ["Stadium Ipoh", "Pengkalan", "Area B", "Area C"],
+            labels: ["Stadium Ipoh", "Pengkalan", "Meru Raya", "Gopeng"],
             datasets: [{
                 label: 'No of cases',
                 data: [<?php
                         echo '"' . $stadiumCaseCountRow . '",';
                         echo '"' . $PengCaseCountRow . '",';
-                        echo '"' . $BCaseCountRow . '",';
-                        echo '"' . $CCaseCountRow . '",';
+                        echo '"' . $meruCaseCountRow . '",';
+                        echo '"' . $gopengCaseCountRow . '",';
                         ?>],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
@@ -150,25 +150,25 @@
     var myPolarChart = new Chart(ctx5, {
         type: 'polarArea',
         data: {
-            labels: ["Fire", "Flood", "Animal Capture", "Others"],
+            labels: ["Faulty Wire", "Equipment Defective", "Crime", "Others"],
             datasets: [{
                 label: 'Type of incident',
                 data: [<?php
-                        echo '"' . $fireCaseCountRow . '",';
-                        echo '"' . $floodCaseCountRow . '",';
-                        echo '"' . $AnimalCaseCountRow . '",';
-                        echo '"' . $OtherCaseCountRow . '",';
+                        echo '"' . $wiringCauseCountRow . '",';
+                        echo '"' . $equipmentCauseCountRow . '",';
+                        echo '"' . $crimeCauseCountRow . '",';
+                        echo '"' . $otherCauseCountRow . '",';
                         ?>],
                 backgroundColor: [
-                    'rgb(255, 99, 132,0.5)',
-                    'rgb(54, 162, 235,0.5)',
                     'rgb(255, 205, 86,0.5)',
+                    'rgb(54, 162, 235,0.5)',
+                    'rgb(255, 99, 132,0.5)',
                     'rgb(155, 89, 182,0.5)'
                 ],
                 borderColor: [
-                    'rgba(255,99,132,0.2)',
-                    'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255,99,132,0.2)',
                     'rgb(155, 89, 182, 0.2)'
                 ],
                 hoverOffset: 6,
@@ -355,6 +355,160 @@
                     },
                 }]
             }
+        }
+    });
+</script>
+
+<!-- Casualties amount chart -->
+<script>
+    ctx9 = document.getElementById("donutChart");
+    donutChart = new Chart(ctx9, {
+        type: 'doughnut',
+        data: {
+            labels: ["Fata", "Injuries", "Saved"],
+            datasets: [{
+                data: [<?php
+                        echo '"' . $fatalityCount . '",';
+                        echo '"' . $injuredCount . '",';
+                        echo '"' . $saveCount . '",';
+                        ?>],
+                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+            },
+            legend: {
+                display: true
+            },
+            cutoutPercentage: 65,
+            animation: {
+                animateScale: true,
+            }
+
+        },
+    });
+</script>
+
+<!-- Lost and recovered asset amount against month chart -->
+<script>
+    const dataSets7 = {
+        labels: [
+            <?php
+            $date = "SELECT reportDate, monthname(reportDate) AS month FROM report";
+            $dateResult = mysqli_query($mysqli, $date);
+            while ($daterow = mysqli_fetch_array($dateResult)) {
+            ?>
+                moment("<?php echo $daterow['reportDate']; ?>"),
+
+            <?php
+            }
+            ?>
+        ],
+        datasets: [{
+                label: ['lost'],
+                data: [
+                    <?php
+                    $countCase = "SELECT SUM(asset_lost) AS lost, reportDate, monthname(reportDate) AS month, year(reportDate) AS year FROM report 
+                GROUP BY year(reportDate), monthname(reportDate)
+                ORDER BY reportDate ASC";
+                    $result = mysqli_query($mysqli, $countCase);
+
+                    while ($row = mysqli_fetch_array($result)) {
+                    ?> {
+                            x: new moment("<?php echo $row['reportDate']; ?>"),
+                            y: <?php echo $row['lost']; ?>
+                        },
+                    <?php
+                    }
+                    ?>
+                ],
+                showLine: true,
+                fill: false,
+                borderColor: 'rgb(255, 0, 0)',
+                backgroundColor: 'rgba(255, 0, 0, 0.6)',
+            },
+            {
+                label: ['recover'],
+                data: [
+                    <?php
+                    $countCase = "SELECT SUM(asset_recover) AS recover, reportDate, monthname(reportDate) AS month, year(reportDate) AS year FROM report 
+                GROUP BY year(reportDate), monthname(reportDate)
+                ORDER BY reportDate ASC";
+                    $result = mysqli_query($mysqli, $countCase);
+
+                    while ($row = mysqli_fetch_array($result)) {
+                    ?> {
+                            x: new moment("<?php echo $row['reportDate']; ?>"),
+                            y: <?php echo $row['recover']; ?>
+                        },
+                    <?php
+                    }
+                    ?>
+                ],
+                showLine: true,
+                fill: false,
+                borderColor: 'rgba(0, 200, 200, 1)',
+                backgroundColor: 'rgba(0, 200, 200, 1)',
+
+            },
+        ]
+    };
+
+    ctx10 = document.getElementById('assetChart');
+    assetChart = new Chart(ctx10, {
+        type: 'line',
+        data: dataSets7,
+        options: {
+
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+
+                    },
+                }],
+                xAxes: [{
+                    type: 'time',
+                    distribution: 'series',
+                    time: {
+                        unit: 'month',
+                        displayFormats: {
+                            'month': 'MMM YYYY'
+                        },
+                        tooltipFormat: 'MMM-YYYY',
+                    },
+                    ticks: {
+                        source: 'auto',
+                    },
+                    maxBarThickness: 200,
+                }]
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+
+                    label: function(tooltipItems, data) {
+                        return 'Total Amount: ' + 'RM' + tooltipItems.yLabel;
+                    }
+                }
+            },
         }
     });
 </script>

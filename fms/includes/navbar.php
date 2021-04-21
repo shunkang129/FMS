@@ -15,9 +15,9 @@ if ($_SESSION['role'] == 'Admin') {
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fa fa-fire"></i>
             </div>
-            <div class="sidebar-brand-text mx-3"> Kang's Dashboard <sup>1</sup></div>
+            <div class="sidebar-brand-text mx-3"> FlameStats</div>
         </a>
 
         <!-- Divider -->
@@ -110,7 +110,8 @@ if ($_SESSION['role'] == 'Admin') {
                             <i class="fas fa-file-alt"></i>
                             &nbsp;
                             &nbsp;
-                            <span>Add Report(Testing)</span></a>
+                            <span>Add Report(Testing)</span>
+                        </a>
                         <a class="collapse-item" href="reportTable.php">
                             <i class="fas fa-table"></i>
                             &nbsp;
@@ -175,17 +176,15 @@ if ($_SESSION['role'] == 'Admin') {
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php
                                     echo $_SESSION['display'];
+                                    $profile_username = $_SESSION['display'];
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="register_edit.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
