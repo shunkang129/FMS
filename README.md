@@ -7,11 +7,13 @@ Current done features:
 - Signup ( For Admin and user role )
 * Currently havent fully decide the role for the system yet
 - Basic CRUD operations
+- Dashboard layout and panel design
+
+Update #2
+- Chartjs implementation (Partially Done)
+- Report section (Partially Done)
 
 Upcoming planned features
-- Report section 
-- Chartjs implementation
-- Dashboard layout and panel design
 - User management for Admin // OR POSSIBLY MASTER USER
 - DomPDF for viewing and printing report
 
