@@ -21,6 +21,9 @@ include('includes/header.php');
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 style="color: orange;"><i class="fas fa-fire"></i> FlameStats</h1>
+                                        <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                            <h6>Fire Incident Management Dashboard System</h6>
+                                        </div>
                                         <hr>
                                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
 

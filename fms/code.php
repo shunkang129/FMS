@@ -12,6 +12,7 @@ if (isset($_POST['loginbtn'])) {
     $data = mysqli_fetch_array($query_run);
 
     $username = $data['name'];
+    $userID = $data['user_ID'];
     $hash = $data['password'];
 
     if ($data['status'] == 'Enable') {
@@ -22,6 +23,7 @@ if (isset($_POST['loginbtn'])) {
                     $_SESSION['login'] = true;
                     $_SESSION['username'] = $email_login;
                     $_SESSION['display'] = $username;
+                    $_SESSION['userID'] = $userID;
                     $_SESSION['role'] = $data['usertype'];
                     header('Location: index.php');
                 } else {
@@ -38,6 +40,7 @@ if (isset($_POST['loginbtn'])) {
                 $_SESSION['login'] = true;
                 $_SESSION['username'] = $email_login;
                 $_SESSION['display'] = $username;
+                $_SESSION['userID'] = $userID;
                 $_SESSION['role'] = $data['usertype'];
                 header('Location: index.php');
             } else {
@@ -53,6 +56,7 @@ if (isset($_POST['loginbtn'])) {
         header('Location: login.php');
     }
 }
+
 
 // signup
 if (isset($_POST['registerbtn'])) {
@@ -72,7 +76,7 @@ if (isset($_POST['registerbtn'])) {
         if ($result) {
             echo "Saved";
             $_SESSION['success'] = "Admin profile added";
-            header('Location: signup.php');
+            header('Location: login.php');
         } else {
             $_SESSION['status'] = "Admin profile not added";
             header('Location: signup.php');
@@ -81,52 +85,6 @@ if (isset($_POST['registerbtn'])) {
         $_SESSION['status'] = "Password and confirm password does not match";
         header('Location: signup.php');
     }
-}
-
-
-// save faculty
-if (isset($_POST['save_faculty'])) {
-
-    $name = $_POST['faculty_name'];
-    $designation = $_POST['faculty_designation'];
-    $description = $_POST['faculty_description'];
-    $images = $_FILES["faculty_image"]['name'];
-
-    if (file_exists("upload/" . $_FILES["faculty_image"]["name"])) {
-        $store = $_FILES['faculty_image']["name"];
-        $_SESSION['status'] = "Image already exist. '. $store.'";
-        header('Location: faculty.php');
-    } else {
-
-        $query = "INSERT INTO faculty(name, designation, description, images) VALUES('$name', '$designation', '$description', '$images')";
-        $query_run = mysqli_query($mysqli, $query);
-
-        if ($query_run) {
-            move_uploaded_file($_FILES["faculty_image"]["tmp_name"], "upload/" . $_FILES["faculty_image"]["name"]);
-            $_SESSION['success'] = "Faculty Added";
-            header('Location: faculty.php');
-        } else {
-            $_SESSION['status'] = "Faculty Not Added";
-            header('Location: faculty.php');
-        }
-    }
-}
-
-
-// check email valid / exist 
-if (isset($_POST['check_submit_btn'])) {
-    $email = $_POST['email_id'];
-    $emailquery = "SELECT * FROM register WHERE email='$email'";
-    $emailquery_run = mysqli_query($mysqli, $emailquery);
-
-    $response = null;
-
-    if (mysqli_num_rows($emailquery_run) > 0) {
-        $response = "<span style='color: red;'>Email already taken, please try another email.</span>";
-    } else {
-        $response = "<span style='color: green;'>Available.</span>";
-    }
-    echo $response;
 }
 
 
@@ -154,10 +112,10 @@ if (isset($_POST['chgBtn'])) {
 
     if ($query_run) {
         $_SESSION['success'] = "Status updated";
-        header('Location: register.php');
+        header('Location: user.php');
     } else {
         $_SESSION['status'] = "Status updated failed";
-        header('Location: register.php');
+        header('Location: user.php');
     }
 }
 
@@ -178,28 +136,11 @@ if (isset($_POST['updateProfilebtn'])) {
     if ($query_run) {
         $_SESSION['success'] = "Your data is updated";
         $_SESSION['display'] = $username;
-        header('Location: register_edit.php');
+        header('Location: profile.php');
     } else {
         $_SESSION['status'] = "Your data is not updated";
         $_SESSION['display'] = $username;
-        header('Location: register_edit.php');
-    }
-}
-
-
-// delete user data (currently removed)
-if (isset($_POST['deletebtn'])) {
-    $id = $_POST['delete_id'];
-
-    $query = "DELETE FROM register WHERE id='$id' "; // add * to test the failed msg
-    $query_run = mysqli_query($mysqli, $query);
-
-    if ($query_run) {
-        $_SESSION['success'] = "Data deleted successfully";
-        header('Location: register.php');
-    } else {
-        $_SESSION['status'] = "Failed to delete data";
-        header('Location: register.php');
+        header('Location: profile.php');
     }
 }
 
@@ -213,9 +154,9 @@ if (isset($_POST['user_name'])) {
     $query_run = mysqli_query($mysqli, $checkName);
 
     if (mysqli_num_rows($query_run) > 0) {
-        echo "User Name Already Exist";
+        echo "<span style='color: red;'>User Name Already Exist</span>";
     } else {
-        echo "OK";
+        echo  "<span style='color: green;'>Available</span>";
     }
     exit();
 }
@@ -230,18 +171,35 @@ if (isset($_POST['user_email'])) {
     $query_run = mysqli_query($mysqli, $checkEmail);
 
     if (mysqli_num_rows($query_run) > 0) {
-        echo "User Name Already Exist";
+        echo "<span style='color: red;'>User Email Already Exist</span>";
     } else {
-        echo "OK";
+        echo  "<span style='color: green;'>Available</span>";
     }
     exit();
 }
 
 
-// add report section
+// register ID verification
+if (isset($_POST['user_registerID'])) {
+    $registerID = $_POST['user_registerID'];
+
+    $checkID = "SELECT user_id FROM register WHERE user_id='$registerID' ";
+
+    $checkID_query_run = mysqli_query($mysqli, $checkID);
+
+    if (mysqli_num_rows($checkID_query_run) > 0) {
+        echo "<span style='color: red;'>ID had registered account</span>";
+    } else {
+        echo  "<span style='color: green;'>Available</span>";
+    }
+    exit();
+}
+
+
+// add report section updated with doc upload
 if (isset($_POST['addReportBtn'])) {
     $branch = $_POST['branch'];
-    $incidentType = $_POST['incidentType'];
+    $incidentArea = $_POST['incidentArea'];
     $incidentCause = $_POST['incidentCause'];
     $reportDate = $_POST['report_date'];
     $fata = $_POST['fatality'];
@@ -249,17 +207,56 @@ if (isset($_POST['addReportBtn'])) {
     $saved = $_POST['saved'];
     $lost = $_POST['assetLost'];
     $recovered = $_POST['assetRecovered'];
+    $contactMethod = $_POST['contact'];
     $PIC = $_POST['personInCharge'];
+    $reportStatus = $_POST['reportStatus'];
 
-    $sql = "INSERT INTO report(branch, incidentType, incidentCause, reportDate, victimFatality, victimInjured, victimSaved, asset_lost, asset_recover, personInCharge) VALUES ('$branch', '$incidentType', '$incidentCause', '$reportDate', '$fata', '$injured', '$saved', '$lost', '$recovered', '$PIC')";
-    $sql_run = mysqli_query($mysqli, $sql);
+    if ($_FILES['myfile']['tmp_name']) {
+        // name of the uploaded file
+        $filename = $_FILES['myfile']['name'];
 
-    if ($sql_run) {
-        $_SESSION['success'] = "Data added";
-        header('Location: reportTest.php');
+        // destination of the file on the server
+        $destination = 'uploads/' . $filename;
+
+        // get the file extension
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        // the physical file on a temporary uploads directory on the server
+        $file = $_FILES['myfile']['tmp_name'];
+        $size = $_FILES['myfile']['size'];
+
+        if (!in_array($extension, ['zip', 'pdf', 'docx', 'doc', 'jpeg', 'png', 'gif'])) {
+            $_SESSION['status'] = "Your file extension must be .zip, .pdf, .docx, .doc, .jpeg, .png, .gif";
+            header('Location: report.php');
+        } else if ($_FILES['myfile']['size'] > 10000000) {
+            // file shouldnt larger than 10MB
+            $_SESSION['status'] = "You file is larger than 10MB";
+            header('Location: report.php');
+        } else {
+            if (move_uploaded_file($file, $destination)) {
+                $sql = "INSERT INTO report(branch, incidentArea, incidentCause, reportDate, victimFatality, victimInjured, victimSaved, asset_lost, asset_recover, contactMethod, personInCharge, reportStatus, docName, docSize) VALUES ('$branch', '$incidentArea', '$incidentCause', '$reportDate', '$fata', '$injured', '$saved', '$lost', '$recovered', '$contactMethod', '$PIC', '$reportStatus', '$filename', '$size')";
+                $sql_run = mysqli_query($mysqli, $sql);
+
+                if ($sql_run) {
+                    $_SESSION['success'] = "You data is added and file is uploaded";
+                    header('Location: report.php');
+                } else {
+                    $_SESSION['status'] = "Failed to add data and upload file";
+                    header('Location: report.php');
+                }
+            }
+        }
     } else {
-        $_SESSION['status'] = "Not added";
-        header('Location: reportTest.php');
+        $sql = "INSERT INTO report(branch, incidentArea, incidentCause, reportDate, victimFatality, victimInjured, victimSaved, asset_lost, asset_recover, contactMethod, personInCharge, reportStatus) VALUES ('$branch', '$incidentArea', '$incidentCause', '$reportDate', '$fata', '$injured', '$saved', '$lost', '$recovered', '$contactMethod', '$PIC', '$reportStatus')";
+        $sql_run = mysqli_query($mysqli, $sql);
+
+        if ($sql_run) {
+            $_SESSION['success'] = "Data added with no files uploaded";
+            header('Location: report.php');
+        } else {
+            $_SESSION['status'] = "Data Not added with no files uploaded";
+            header('Location: report.php');
+        }
     }
 }
 
@@ -269,7 +266,7 @@ if (isset($_POST['editReportButton'])) {
 
     $id = $_POST['update_ReportID'];
     $new_branch = $_POST['update_branch'];
-    $new_incidentType = $_POST['update_incidentType'];
+    $new_incidentArea = $_POST['update_incidentArea'];
     $new_incidentCause = $_POST['update_incidentCause'];
     $new_reportDate = $_POST['update_incidentDate'];
     $new_fata = $_POST['update_fatality'];
@@ -277,9 +274,11 @@ if (isset($_POST['editReportButton'])) {
     $new_saved = $_POST['update_saved'];
     $new_lost = $_POST['update_assetLost'];
     $new_recovered = $_POST['update_assetRecovered'];
+    $new_contactMethod = $_POST['update_contact'];
     $new_personInCharge = $_POST['update_personInCharge'];
+    $new_reportStatus = $_POST['update_reportStatus'];
 
-    $sql = "UPDATE report SET branch='$new_branch', incidentType='$new_incidentType', incidentCause='$new_incidentCause', reportDate='$new_reportDate', victimFatality='$new_fata', victimInjured='$new_injured', victimSaved='$new_saved', asset_lost='$new_lost', asset_recover='$new_recovered', personInCharge='$new_personInCharge' WHERE id = '$id' ";
+    $sql = "UPDATE report SET branch='$new_branch', incidentArea='$new_incidentArea', incidentCause='$new_incidentCause', reportDate='$new_reportDate', victimFatality='$new_fata', victimInjured='$new_injured', victimSaved='$new_saved', asset_lost='$new_lost', asset_recover='$new_recovered', contactMethod='$new_contactMethod', personInCharge='$new_personInCharge', reportStatus='$new_reportStatus' WHERE id = '$id' ";
     $sql_run = mysqli_query($mysqli, $sql);
 
     if ($sql_run) {
@@ -289,5 +288,60 @@ if (isset($_POST['editReportButton'])) {
     } else {
         $_SESSION['status'] = "Not updated";
         header('Location: reportTable.php');
+    }
+}
+
+
+// delete report section
+if (isset($_POST['deleteReportBtn'])) {
+    $id = $_POST['delete_id'];
+
+    $query = "DELETE FROM report WHERE id='$id' "; // add * to test the failed msg
+    $query_run = mysqli_query($mysqli, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Selected Report is deleted";
+        header('Location: reportTable.php');
+    } else {
+        $_SESSION['status'] = "Failed to delete Report";
+        header('Location: reportTable.php');
+    }
+}
+
+
+// database backup section
+if (isset($_POST['backup'])) {
+    $backup_file = $_SESSION['userID'] . '_' . date("Y-M-d") . '.sql';
+    $filepath = "dbBackup/$backup_file";
+    $backup = exec('C:/xamppNew/mysql/bin/mysqldump --user=root --password=' . $db_password . ' --host=localhost ' . $db_name . ' > ' . $filepath . ' 2>&1');
+
+    if (file_exists($filepath)) {
+
+        $_SESSION['success'] = $backup_file . " Backup Success";
+        header('Location: backup.php');
+    } else {
+        $_SESSION['status'] = "Backup of " . $db_name . " does not exist in " . $filepath;
+        header('Location: backup.php');
+    }
+}
+
+
+// database download section
+if (isset($_POST['download'])) {
+    $backup_file = $_SESSION['userID'] . '_' . date("Y-M-d") . '.sql';
+    $filepath = "dbBackup/$backup_file";
+    if (file_exists($filepath)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . basename($filepath) . '.sql"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filepath));
+        readfile($filepath);
+        exit;
+    } else {
+        $_SESSION['status'] = $backup_file . " File does not exist!";
+        header('Location: backup.php');
     }
 }

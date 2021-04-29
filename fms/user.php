@@ -1,6 +1,7 @@
 <?php
 
 include('security.php');
+include('chartSetup.php');
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -120,13 +121,9 @@ include('includes/navbar.php');
                                     <td class="align-middle">
                                         <div id="actionsBtn">
                                             <input type="hidden" name="view_id" value="<?php echo $row['id']; ?>">
-                                            <button type="button" name="viewBtn" class="btn btn-success btn-circle btn-sm viewBtn"><i class="fas fa-eye"></i></button>
+                                            <button type="button" name="viewBtn" class="btn btn-info btn-circle btn-sm viewBtn"><i class="fas fa-eye"></i></button>
                                             &nbsp;
 
-                                            <form action="register_edit.php" method="POST">
-                                                <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                                <button type="submit" class="btn btn-info btn-circle btn-sm" name="edit_btn"> <i class="fas fa-edit"></i></button> </button>
-                                            </form>
                                             &nbsp;
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="chg_id" value="<?php echo $row['id']; ?>">
@@ -155,6 +152,42 @@ include('includes/navbar.php');
                 </table>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">System User Statistics</h1>
+    </div>
+    <div class="row">
+
+        <div class="col-xl-6">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Registered User Chart</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myChart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">User Status Chart</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="userStatusChart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

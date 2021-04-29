@@ -4,29 +4,7 @@ $(function() {
 });
 
 
-$(function() {
-    $("#myModal").modal('show');
-});
-
-
-$(function() {
-    $('.check_email').on("input", function(e) {
-
-        var email = $('.check_email').val();
-        $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-                'check_submit_btn': 1,
-                'email_id': email
-            },
-            success: function(response) {
-                $('.error_email').html(response);
-            }
-        });
-    });
-});
-
+// Datepicker default styling configuration section
 $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
     icons: {
         time: 'far fa-clock',
@@ -41,12 +19,7 @@ $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Const
     }
 });
 
-$(function() {
-    $('#datetimepicker1').datetimepicker({
-        format: "YYYY-MM-DD HH:mma"
-    });
-});
-
+// Report datepicker formatter
 $(function() {
     $('#datetimepicker2').datetimepicker({
         format: "YYYY-MM-DD",
@@ -54,6 +27,8 @@ $(function() {
     });
 });
 
+
+// Modal datepicker formatter
 $(function() {
     $('#datetimepicker3').datetimepicker({
         format: "YYYY-MM-DD",
@@ -61,14 +36,15 @@ $(function() {
     });
 });
 
+
 // delete confirmation
-$(document).on('click', '#delBtn', function confirmDel() {
-    if (confirm("Are you sure you want to delete this data?")) {
+$(document).on('click', '#deleteReportBtn', function confirmDel() {
+    if (confirm("Are you sure you want to delete this report data?")) {
         $.ajax({
             url: "code.php",
             method: "POST",
             data: {
-                'deletebtn': 1,
+                'deleteReportBtn': 1,
             },
         });
         return true;
@@ -77,15 +53,16 @@ $(document).on('click', '#delBtn', function confirmDel() {
     }
 });
 
+
 // alert message timeout 
 window.setTimeout(function() {
     $("#message").fadeTo(500, 0).slideUp(1000, function() {
         $(this).remove();
     });
-}, 3000);
+}, 2000);
 
 
-
+// name validation at sign up form
 function checkname() {
     var name = document.getElementById("register_name").value;
 
@@ -112,6 +89,64 @@ function checkname() {
     }
 }
 
+
+// email validation at sign up form
+function checkEmail() {
+    var email = document.getElementById("register_email").value;
+
+    if (email) {
+        $.ajax({
+            type: 'post',
+            url: 'code.php',
+            data: {
+                user_email: email,
+            },
+            success: function(response) {
+                $('#email_status').html(response);
+                if (response == "OK") {
+                    return true;
+                } else {
+
+                    return false;
+                }
+            }
+        });
+    } else {
+        $('#email_status').html("");
+        return false;
+    }
+}
+
+
+// ID validation at sign up form
+function checkUserID() {
+    var filled_id = document.getElementById("register_id").value;
+
+    if (filled_id) {
+        $.ajax({
+            type: 'post',
+            url: 'code.php',
+            data: {
+                user_registerID: filled_id,
+            },
+            success: function(response) {
+                $('#id_status').html(response);
+                if (response == "OK") {
+                    return true;
+                } else {
+
+                    return false;
+                }
+            }
+        });
+    } else {
+        $('#id_status').html("");
+        return false;
+    }
+}
+
+
+// confirmation for enabling and disabling users (DISABLE)
 $(document).on('click', '#disableBtn', function confirmChg() {
     if (confirm("Are you sure you want to disable this user?")) {
         $.ajax({
@@ -127,6 +162,8 @@ $(document).on('click', '#disableBtn', function confirmChg() {
     }
 });
 
+
+// confirmation for enabling and disabling users (ENABLE)
 $(document).on('click', '#enableBtn', function confirmChg() {
     if (confirm("Are you sure you want to enable this user?")) {
         $.ajax({
@@ -141,3 +178,12 @@ $(document).on('click', '#enableBtn', function confirmChg() {
         return false;
     }
 });
+
+
+// to show the file name at upload tab
+$('input[type="file"]').on('change', function(e) {
+    //get the file name
+    var fileName = e.target.files[0].name;
+    //replace the "Choose a file" label
+    $('.custom-file-label').html(fileName);
+})

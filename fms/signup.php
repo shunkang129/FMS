@@ -48,12 +48,13 @@ include('includes/header.php');
                                         <div class="form-group row">
                                             <div class="col-sm-8">
                                                 <label>Email</label>
-                                                <input type="email" name="email" class="form-control check_email" placeholder="Enter Email Address..." required>
-                                                <small class="error_email"></small>
+                                                <input type="email" name="email" id="register_email" class="form-control check_email" placeholder="Enter Email Address..." onkeyup="checkEmail();" required>
+                                                <small id="email_status"></small>
                                             </div>
                                             <div class="col-sm-4">
                                                 <label>ID</label>
-                                                <input type="text" name="user_id" class="form-control" placeholder="Enter ID" required>
+                                                <input type="text" name="user_id" id="register_id" class="form-control check_id" placeholder="Enter ID" onkeyup="checkUserID();" required>
+                                                <small id="id_status"></small>
                                             </div>
                                         </div>
 

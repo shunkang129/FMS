@@ -23,41 +23,43 @@ if ($_SESSION['role'] == 'Admin') {
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="index.php">
+                <i class="fas fa-chart-pie"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <i class="fas fa-chart-area"></i>
+                <span>Charts</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Chart category</h6>
+                    <a class="collapse-item" href="incidentChart.php">
+                        <i class="fas fa-chart-bar"></i>
+                        &nbsp;
+                        &nbsp;
+                        <span>Incident Statistics</span></a>
+                    <a class="collapse-item" href="victimChart.php">
+                        <i class="fas fa-user-injured"></i>
+                        &nbsp;
+                        &nbsp;
+                        <span>Victim Statistics</span></a>
+                </div>
+            </div>
+        </li>
         <?php
-        if ($_SESSION['role'] == 'admin' || 'admin') {
+        if ($_SESSION['role'] == 'Admin') {
 
         ?>
-            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="faculty.php">
-                    <i class="fas fa-school"></i>
-                    <span>Faculty</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-chart-area"></i>
-                    <span>Charts</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Chart category</h6>
-                        <a class="collapse-item" href="chartTest.php">
-                            <i class="fas fa-user-plus"></i>
-                            &nbsp;
-                            &nbsp;
-                            <span>Chart 1</span></a>
-                        <a class="collapse-item" href="#">
-                            <i class="fas fa-user-plus"></i>
-                            &nbsp;
-                            &nbsp;
-                            <span>Chart 2</span></a>
-                    </div>
-                </div>
+                <a class="nav-link" href="backup.php">
+                    <i class="fas fa-database"></i>
+                    <span>Backup Database</span></a>
             </li>
         <?php
         }
@@ -71,28 +73,29 @@ if ($_SESSION['role'] == 'Admin') {
                 Actions
             </div>
 
-            <!-- Nav Item - Report Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user-cog"></i>
-                    <span>Users</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Manage Users</h6>
-                        <a class="collapse-item" href="#">
-                            <i class="fas fa-user-plus"></i>
-                            &nbsp;
-                            &nbsp;
-                            <span>Add users</span></a>
-                        <a class="collapse-item" href="register.php">
-                            <i class="fas fa-table"></i>
-                            &nbsp;
-                            &nbsp;
-                            <span>View Users table</span></a>
+            <?php
+            if ($_SESSION['role'] == 'Admin') {
+            ?>
+                <!-- Nav Item - Report Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Users</h6>
+                            <a class="collapse-item" href="user.php">
+                                <i class="fas fa-user-cog"></i>
+                                &nbsp;
+                                &nbsp;
+                                <span>View Users table</span></a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            <?php
+            }
+            ?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-file-alt"></i>
@@ -105,12 +108,7 @@ if ($_SESSION['role'] == 'Admin') {
                             <i class="fas fa-file-alt"></i>
                             &nbsp;
                             &nbsp;
-                            <span>Add Report</span></a>
-                        <a class="collapse-item" href="reportTest.php">
-                            <i class="fas fa-file-alt"></i>
-                            &nbsp;
-                            &nbsp;
-                            <span>Add Report(Testing)</span>
+                            <span>Add Report</span>
                         </a>
                         <a class="collapse-item" href="reportTable.php">
                             <i class="fas fa-table"></i>
@@ -183,7 +181,7 @@ if ($_SESSION['role'] == 'Admin') {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="register_edit.php">
+                                <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
