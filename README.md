@@ -1,7 +1,7 @@
 # FMS
 FYP Fire incident management system
 
-
+Update #1
 Current done features:
 - Login ( For Admin and user role )
 - Signup ( For Admin and user role )
@@ -20,12 +20,28 @@ Update #3
   - Enable and Disable normal users
 - Added user profile page (Editable)
 
+Update #4 29/04/2021
+- Added viewing and printing report (PDF format)
+- Added features to enable users to upload and download documents (Upload is optional)
+- Added feature to allow admin users to backup databases
+- Added minor filter that allow users to change the chart type (Eg. Bar -> Line / vice versa)
+- Updated the Case amount over month Bar chart to become Mixed chart with Victim count being displayed as Line graph
+- Minor frontend design tweak (Improve overall icons, fonts, system layout)
+- Added minor name, email and ID checking when new users are registering account
+*Misc mentions*
+- Rename most files to proper naming format
+- Remove unnecessary plugins files 
+- Create new file for chart data setup instead of putting the setups at the main dbconfig file
+- Added comments on most functions and features for better read
+- Created 2 more chart pages specifically for incident & victims info for better and clearer access
+
 
 Upcoming planned features
-- DomPDF for viewing and printing report
-- Upload and download documents from the system
-- Backup databases feature for admin users
-
+- Print overview report (Optional)
+- Error check & input validation
+- Loading popout modal
+- Hosting?
+- TBD
 
 
 Kong Shun Kang 61164
