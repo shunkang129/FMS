@@ -2,10 +2,7 @@
 session_start();
 
 if (isset($_POST['logoutbtn'])) {
+    session_unset();
     session_destroy();
-    unset($_SESSION['username']);
-    unset($_SESSION['display']);
-    unset($_SESSION['role']);
-    unset($_SESSION['login']);
     header('Location: login.php');
 }

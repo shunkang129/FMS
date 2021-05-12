@@ -15,14 +15,14 @@ include('includes/navbar.php');
                         <?php
 
                         if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert"> ' . $_SESSION['success'] . ' 
+                            echo '<div class="alert alert-success alert-dismissible fade show" id="message" role="alert"> ' . $_SESSION['success'] . ' 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span> </button></div>';
                             unset($_SESSION['success']);
                         }
 
                         if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"> ' . $_SESSION['status'] . ' 
+                            echo '<div class="alert alert-danger alert-dismissible fade show" id="message" role="alert"> ' . $_SESSION['status'] . ' 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span> </button></div>';
                             unset($_SESSION['status']);
@@ -63,23 +63,19 @@ include('includes/navbar.php');
                             </div>
                             <div class="form-group">
                                 <label> Email </label>
-                                <input type="email" value="<?php echo $row['email'] ?>" name="edit_email" class="form-control" placeholder="Enter Email">
+                                <input type="email" value="<?php echo $row['email'] ?>" name="edit_email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
                                 <label> ID </label>
-                                <input type="text" value="<?php echo $row['user_ID'] ?>" name="edit_accountID" class="form-control" placeholder="Enter ID">
+                                <input type="text" value="<?php echo $row['user_ID'] ?>" name="edit_accountID" class="form-control" placeholder="Enter ID" required>
                             </div>
                             <div class="form-group">
                                 <label> Password </label>
-                                <input type="password" value="<?php echo $row['password'] ?>" name="edit_password" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="edit_password" class="form-control" placeholder="Enter Old/New Password" required>
                             </div>
                             <div class="form-group">
                                 <label> Role </label>
-                                <select name="update_usertype" class="form-control">
-                                    <option selected><?php echo $row['usertype'] ?></option>
-                                    <option>Admin</option>
-                                    <option>User</option>
-                                </select>
+                                <input type="text" value="<?php echo $row['usertype'] ?>" name="update_usertype" class="form-control" readonly>
                             </div>
 
                             <button type="submit" name="updateProfilebtn" class="btn btn-primary float-right"><i class="fas fa-edit"></i> Update </button>

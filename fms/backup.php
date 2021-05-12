@@ -44,7 +44,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
             <!-- DataTables Example -->
             <div class="card shadow">
                 <div class="card-header ">
-                    <h6 class="m-0 font-weight-bold text-primary">Database</h6>
+                    <h6 class="m-0 font-weight-bold text-secondary float-left">Please be informed that always back up first before download</h6>
                     <h6 class="m-0 font-weight-bold text-dark float-right"><?php echo date('Y-m-d H:i'); ?></h6>
                 </div>
                 <div class="card-body">
@@ -65,7 +65,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 
                                             <form action="code.php" method="POST">
                                                 <div class="form-row float-right">
-                                                    <button type="submit" name="backup" class="btn btn-primary btn-md"> <i class="fas fa-file-export"></i> Backup </button>
+                                                    <button type="submit" name="backup" class="btn btn-primary btn-md" onclick="loadmodal();"> <i class="fas fa-file-export"></i> Backup </button>
                                                     &nbsp;
                                                     &nbsp;
                                                     &nbsp;
@@ -88,6 +88,24 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
     </div>
 
 </div>
+
+
+<!-- Backup loading modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered justify-content-center" role="status">
+
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h6><i class="spinner-border text-primary"></i></h6>
+                <h5 class="text-primary">Backing up database</h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /.modal fade -->
+
+
 
 
 

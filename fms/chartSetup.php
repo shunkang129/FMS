@@ -3,7 +3,7 @@
 $server_name = "localhost";
 $db_username = "root";
 $db_password = "";
-$db_name = "fms_test";
+$db_name = "fms";
 
 $mysqli = new mysqli($server_name, $db_username, $db_password, $db_name);
 
@@ -29,7 +29,7 @@ if ($mysqli) {
     ';
 }
 
-// pie chart (user stats)
+// user stats
 $adminCount = mysqli_query($mysqli, "SELECT id FROM register WHERE usertype='Admin'");
 $adminCountRow = mysqli_num_rows($adminCount);
 
@@ -39,7 +39,6 @@ $userCountRow = mysqli_num_rows($userCount);
 $otherCount = mysqli_query($mysqli, "SELECT id FROM register");
 $otherCountRow = mysqli_num_rows($otherCount);
 
-// pie chart (user stats)
 $enableCount = mysqli_query($mysqli, "SELECT id FROM register WHERE `status`='Enable'");
 $enableCountRow = mysqli_num_rows($enableCount);
 

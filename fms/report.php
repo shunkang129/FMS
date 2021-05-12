@@ -27,7 +27,8 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
     $query_run = mysqli_query($mysqli, $query);
     $data = mysqli_fetch_assoc($query_run);
     ?>
-    <!-- DataTables Example -->
+
+    <!-- DataTables -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
@@ -42,7 +43,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
         <div class="card-body">
 
 
-            <h6 class="m-0 font-weight-bold text-secondary">Branch info</h6>
+            <h6 class="m-0 font-weight-bold text-secondary">Station info</h6>
             &nbsp;
             &nbsp;
             &nbsp;
@@ -50,9 +51,9 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 <input type="hidden" name="personInCharge" value="<?php echo $data['name']; ?>">
                 <div class="form-row">
                     <div class="form-group col-md-2">
-                        <label>Branch</label>
-                        <select name="branch" class="form-control">
-                            <option selected>Choose...</option>
+                        <label>Station</label>
+                        <select name="branch" class="form-control" required>
+                            <option value="" selected>Choose...</option>
                             <option>Stadium Ipoh</option>
                             <option>Pengkalan</option>
                             <option>Meru Raya</option>
@@ -68,8 +69,8 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Incident Area</label>
-                        <select name="incidentArea" class="form-control">
-                            <option selected>Choose...</option>
+                        <select name="incidentArea" class="form-control" required>
+                            <option value="" selected>Choose...</option>
                             <option>Hulu Perak</option>
                             <option>Kinta</option>
                             <option>Manjung</option>
@@ -83,8 +84,8 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 
                     <div class="form-group col-md-3">
                         <label>Incident Cause</label>
-                        <select name="incidentCause" class="form-control">
-                            <option selected>Choose...</option>
+                        <select name="incidentCause" class="form-control" required>
+                            <option value="" selected>Choose...</option>
                             <option>Faulty Wiring</option>
                             <option>Equipment Defective</option>
                             <option>Crime</option>
@@ -98,7 +99,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                     <div class="form-group col-md-3">
                         <label for="">Incident DATE ONLY</label>
                         <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                            <input type="text" name="report_date" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                            <input type="text" name="report_date" class="form-control datetimepicker-input" data-target="#datetimepicker2" required />
                             <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -172,7 +173,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 
                 <div class="form-row">
                     <div class="form-group col-md-2">
-                        <label>Assets damaged/lost</label>
+                        <label>Assets Damaged/Lost</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">RM</span>

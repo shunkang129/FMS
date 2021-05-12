@@ -146,6 +146,34 @@ function checkUserID() {
 }
 
 
+function checkPW() {
+    var pw_id = document.getElementById("password_id").value;
+    var cpw_id = document.getElementById("confirmpassword_id").value;
+
+    if (cpw_id) {
+        $.ajax({
+            type: 'post',
+            url: 'code.php',
+            data: {
+                pw: pw_id,
+                cpw: cpw_id,
+            },
+            success: function(response) {
+                $('#password_status').html(response);
+                if (response == "OK") {
+                    return true;
+                } else {
+
+                    return false;
+                }
+            }
+        });
+    } else {
+        $('#password_status').html("");
+        return false;
+    }
+}
+
 // confirmation for enabling and disabling users (DISABLE)
 $(document).on('click', '#disableBtn', function confirmChg() {
     if (confirm("Are you sure you want to disable this user?")) {
@@ -186,4 +214,18 @@ $('input[type="file"]').on('change', function(e) {
     var fileName = e.target.files[0].name;
     //replace the "Choose a file" label
     $('.custom-file-label').html(fileName);
+})
+
+// to display the loading modal
+function loadmodal() {
+    $('#loadingModal').modal('show');
+    setTimeout(function() {
+        console.log('completed');
+        $('.modal').modal('hide');
+    }, 2000);
+}
+
+// to initialize the bootstrap tooltip
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
 })

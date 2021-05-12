@@ -6,47 +6,6 @@ include('includes/header.php');
 include('includes/navbar.php');
 ?>
 
-<!-- Modal -->
-<div class="modal fade" id="addadminprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add admin data</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form action="code.php" method="POST">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label> Username </label>
-                        <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label> Email </label>
-                        <input type="email" name="email" class="form-control check_email" placeholder="Enter Email" required>
-                        <small class="error_email"></small>
-                    </div>
-                    <div class="form-group">
-                        <label> Password </label>
-                        <input type="password" name="password" class="form-control" placeholder="Enter Password">
-                    </div>
-                    <div class="form-group">
-                        <label> Confirm Password</label>
-                        <input type="password" name="confirmpassword" id="" class="form-control" placeholder="Confirm Password">
-                    </div>
-                    <input type="hidden" name="usertype" value="admin">
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
-<!-- /.modal fade -->
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -54,9 +13,6 @@ include('includes/navbar.php');
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">User List
-                <button type="button" class="btn btn-primary btn-sm btn-circle float-right" data-toggle="modal" data-target="#addadminprofile">
-                    <i class="fas fa-plus"></i>
-                </button>
             </h6>
         </div>
         <div class="card-body">
@@ -110,18 +66,23 @@ include('includes/navbar.php');
                                     <?php
                                     if ($row['status'] == 'Enable') {
                                     ?>
-                                        <td class="align-middle"><button class="btn-primary btn-sm"><?php echo $row['status']; ?></button></td>
+
+                                        <td class="align-middle">
+                                            <h6><span class="badge badge-pill badge-primary"><?php echo $row['status']; ?></span></h6>
+                                        </td>
                                     <?php
                                     } else if ($row['status'] == 'Disable') {
                                     ?>
-                                        <td class="align-middle"><button class="btn-danger btn-sm"><?php echo $row['status']; ?></button></td>
+                                        <td class="align-middle">
+                                            <h6><span class="badge badge-pill badge-danger"><?php echo $row['status']; ?></span></h6>
+                                        </td>
                                     <?php
                                     }
                                     ?>
                                     <td class="align-middle">
                                         <div id="actionsBtn">
                                             <input type="hidden" name="view_id" value="<?php echo $row['id']; ?>">
-                                            <button type="button" name="viewBtn" class="btn btn-info btn-circle btn-sm viewBtn"><i class="fas fa-eye"></i></button>
+                                            <button type="button" name="viewBtn" class="btn btn-info btn-circle btn-sm viewBtn" data-toggle="tooltip" data-placement="top" title="View User Data"><i class="fas fa-eye"></i></button>
                                             &nbsp;
 
                                             &nbsp;
@@ -129,11 +90,11 @@ include('includes/navbar.php');
                                                 <input type="hidden" name="chg_id" value="<?php echo $row['id']; ?>">
                                                 <?php if ($row['status'] == 'Enable') {
                                                 ?>
-                                                    <button type="submit" name="chgBtn" id="disableBtn" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-sync-alt"></i> </button>
+                                                    <button type="submit" name="chgBtn" id="disableBtn" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Disable User"> <i class="fas fa-sync-alt"></i> </button>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <button type="submit" name="chgBtn" id="enableBtn" class="btn btn-primary btn-circle btn-sm"> <i class="fas fa-check"></i> </button>
+                                                    <button type="submit" name="chgBtn" id="enableBtn" class="btn btn-primary btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Enable User"> <i class="fas fa-check"></i> </button>
                                                 <?php
                                                 }
                                                 ?>
@@ -191,8 +152,7 @@ include('includes/navbar.php');
     </div>
 </div>
 
-<!-- View modal -->
-<!-- Modal -->
+<!-- View user info modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -200,7 +160,6 @@ include('includes/navbar.php');
                 <h5 class="modal-title">Admin data</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
 
             <div class="modal-body">
                 <input type="hidden" name="viewID" id="viewID">
@@ -226,8 +185,6 @@ include('includes/navbar.php');
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-
-
 
         </div>
     </div>

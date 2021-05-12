@@ -3,7 +3,7 @@ session_start();
 $server_name = "localhost";
 $db_username = "root";
 $db_password = "";
-$db_name = "fms_test";
+$db_name = "fms";
 
 $mysqli = new mysqli($server_name, $db_username, $db_password, $db_name);
 

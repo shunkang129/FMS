@@ -47,7 +47,7 @@ include('includes/navbar.php');
                         <tr>
                             <th>Report ID</th>
                             <th>Station</th>
-                            <th>Incident Type</th>
+                            <th>Incident Area</th>
                             <th>Incident Cause</th>
                             <th>Incident Date</th>
                             <th>Fatalities</th>
@@ -103,25 +103,25 @@ include('includes/navbar.php');
                                         <div id="actionsBtn">
 
                                             <input type="hidden" name="view_id" value="<?php echo $row['id']; ?>">
-                                            <button type="button" class="btn btn-info btn-circle btn-sm viewBtn" name="viewBtn"><i class="fas fa-eye"></i></button>
+                                            <button type="button" class="btn btn-info btn-circle btn-sm viewBtn" name="viewBtn" data-toggle="tooltip" data-placement="top" title="View Report"><i class="fas fa-eye"></i></button>
                                             &nbsp;
 
 
                                             <form method="POST" action="print.php">
                                                 <input type="hidden" name="printReport_id" value="<?php echo $row['id']; ?>">
-                                                <button type="submit" id="printBtn" class="btn btn-warning btn-circle btn-sm" name="printReport_btn"> <i class="fas fa-file-pdf"></i></button>&nbsp;
+                                                <button type="submit" id="printBtn" class="btn btn-warning btn-circle btn-sm" name="printReport_btn" formtarget="_blank" data-toggle="tooltip" data-placement="top" title="Print"> <i class="fas fa-file-pdf"></i></button>&nbsp;
                                             </form>
                                             &nbsp;
 
                                             <?php if ($_SESSION['role'] == 'Admin') { ?>
                                                 <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                                <button type="submit" class="btn btn-success btn-circle btn-sm editReportBtn" name="edit_btn"> <i class="fas fa-edit"></i></button> </button>
+                                                <button type="submit" class="btn btn-success btn-circle btn-sm editReportBtn" name="edit_btn" data-toggle="tooltip" data-placement="top" title="Edit Report"> <i class="fas fa-edit"></i></button> </button>
 
                                                 &nbsp;
 
                                                 <form action="code.php" method="POST">
                                                     <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" id="deleteReportBtn" name="deleteReportBtn" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-trash"></i> </button>
+                                                    <button type="submit" id="deleteReportBtn" name="deleteReportBtn" class="btn btn-danger btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Report"> <i class="fas fa-trash"></i> </button>
                                                 </form>
                                             <?php
                                             }
@@ -159,7 +159,7 @@ include('includes/navbar.php');
                     <input type="text" name="viewID" id="viewID" class="form-control" readonly style="border: none;">
                 </div>
                 <div class="form-group">
-                    <label> Branch </label>
+                    <label> Station </label>
                     <input type="text" id="view_branch" class="form-control" disabled style="border: none;">
 
                 </div>
@@ -251,7 +251,7 @@ include('includes/navbar.php');
                         <input type="text" id="update_ReportID" name="update_ReportID" class="form-control" readonly="readonly" style="font-weight: bold; font-size: 20px; border-style: none; background-color: transparent;">
                     </div>
                     <div class="form-group">
-                        <label> Branch </label>
+                        <label> Station </label>
                         <select name="update_branch" id="update_branch" class="form-control">
                             <option selected>Choose...</option>
                             <option>Stadium Ipoh</option>

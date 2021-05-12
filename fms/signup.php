@@ -33,7 +33,7 @@ include('includes/header.php');
                                     }
 
                                     if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert"> ' . $_SESSION['status'] . ' 
+                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"> ' . $_SESSION['status'] . ' 
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span> </button></div>';
                                         unset($_SESSION['status']);
@@ -61,11 +61,12 @@ include('includes/header.php');
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label>Password</label>
-                                                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                                <input type="password" name="password" id="password_id" class="form-control" placeholder="Password" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Confirm password</label>
-                                                <input type="password" name="confirmpassword" class="form-control" placeholder="Repeat Password" required>
+                                                <input type="password" name="confirmpassword" id="confirmpassword_id" class="form-control" placeholder="Repeat Password" onkeyup="checkPW();" required>
+                                                <small id="password_status"></small>
                                             </div>
                                         </div>
                                         <div class="form-group">

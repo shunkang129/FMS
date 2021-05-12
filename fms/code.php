@@ -51,8 +51,11 @@ if (isset($_POST['loginbtn'])) {
             $_SESSION['status'] = "Email OR password is INVALID";
             header('Location: login.php');
         }
-    } else {
+    } else if ($data['status'] == 'Disable') {
         $_SESSION['status'] = "Your account has been disabled. Please contact Admin";
+        header('Location: login.php');
+    } else {
+        $_SESSION['status'] = "Email/Password is Invalid";
         header('Location: login.php');
     }
 }
@@ -196,6 +199,21 @@ if (isset($_POST['user_registerID'])) {
 }
 
 
+// register password and confirm password verification
+if (isset($_POST['pw'])) {
+    $password = $_POST['pw'];
+    $confirmpassword = $_POST['cpw'];
+
+
+    if ($password != $confirmpassword) {
+        echo "<span style='color: red;'>Not Match</span>";
+    } else {
+        echo  "<span style='color: green;'>Match</span>";
+    }
+    exit();
+}
+
+
 // add report section updated with doc upload
 if (isset($_POST['addReportBtn'])) {
     $branch = $_POST['branch'];
@@ -211,6 +229,7 @@ if (isset($_POST['addReportBtn'])) {
     $PIC = $_POST['personInCharge'];
     $reportStatus = $_POST['reportStatus'];
 
+    // check if users upload any document
     if ($_FILES['myfile']['tmp_name']) {
         // name of the uploaded file
         $filename = $_FILES['myfile']['name'];
@@ -311,6 +330,7 @@ if (isset($_POST['deleteReportBtn'])) {
 
 // database backup section
 if (isset($_POST['backup'])) {
+    sleep(2);
     $backup_file = $_SESSION['userID'] . '_' . date("Y-M-d") . '.sql';
     $filepath = "dbBackup/$backup_file";
     $backup = exec('C:/xamppNew/mysql/bin/mysqldump --user=root --password=' . $db_password . ' --host=localhost ' . $db_name . ' > ' . $filepath . ' 2>&1');

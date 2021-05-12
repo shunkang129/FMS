@@ -56,7 +56,7 @@ if (isset($_POST['printReport_btn'])) {
         <td align="left">
             <span style="font-size:16px;"><b>Incident Date : </b></span>
             <hr style=" border: 1px dotted black;">
-            <span style="font-size:16px;"><b>Incident Zone: </b></span>
+            <span style="font-size:16px;"><b>Incident Area: </b></span>
             <hr style=" border: 1px dotted black;">
             <span style="font-size:16px;"><b>Incident Cause : </b></span>
             <hr style=" border: 1px dotted black;">
