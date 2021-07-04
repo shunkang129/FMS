@@ -257,7 +257,7 @@ if (isset($_POST['addReportBtn'])) {
                 $sql_run = mysqli_query($mysqli, $sql);
 
                 if ($sql_run) {
-                    $_SESSION['success'] = "You data is added and file is uploaded";
+                    $_SESSION['success'] = "Data added and file is uploaded";
                     header('Location: report.php');
                 } else {
                     $_SESSION['status'] = "Failed to add data and upload file";
