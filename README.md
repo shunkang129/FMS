@@ -35,11 +35,14 @@ Update #4 29/04/2021
 - Added comments on most functions and features for better read
 - Created 2 more chart pages specifically for incident & victims info for better and clearer access
 
+Update #5 12/05/2021
+- Added loading popout modal for database backup
+- Updated input validation (id, email, name)
+- Fixed some minor typos
 
 Upcoming planned features
 - Print overview report (Optional)
 - Error check & input validation
-- Loading popout modal
 - Hosting?
 - TBD
 
